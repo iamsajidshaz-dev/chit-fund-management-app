@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "589402839348",
+    "project_id": "shamazchits-shammu",
+    "storage_bucket": "shamazchits-shammu.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:589402839348:android:470729db1dd1064d3b6d61",
+        "android_client_info": {
+          "package_name": "com.example.shamazchits"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdlB08WVknSrkS1OaHSwcoh7TFPENcL1g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
