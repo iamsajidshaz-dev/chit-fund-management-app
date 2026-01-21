@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'services/auth_service.dart';
@@ -13,7 +14,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +61,7 @@ class MyApp extends StatelessWidget {
 }
 
 class AuthWrapper extends StatelessWidget {
-  const AuthWrapper({super.key});
+  const AuthWrapper({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +113,7 @@ class AuthWrapper extends StatelessWidget {
 
 // Wrapper for Admin Dashboard with back button handling
 class AdminDashboardWrapper extends StatelessWidget {
-  const AdminDashboardWrapper({super.key});
+  const AdminDashboardWrapper({Key? key}) : super(key: key);
 
   Future<bool> _onWillPop(BuildContext context) async {
     final shouldPop = await showDialog<bool>(
@@ -138,8 +139,16 @@ class AdminDashboardWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () => _onWillPop(context),
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (bool didPop) async {
+        if (didPop) return;
+        
+        final shouldPop = await _onWillPop(context);
+        if (shouldPop && context.mounted) {
+          SystemNavigator.pop();
+        }
+      },
       child: const AdminDashboard(),
     );
   }
@@ -147,7 +156,7 @@ class AdminDashboardWrapper extends StatelessWidget {
 
 // Wrapper for Customer Dashboard with back button handling
 class CustomerDashboardWrapper extends StatelessWidget {
-  const CustomerDashboardWrapper({super.key});
+  const CustomerDashboardWrapper({Key? key}) : super(key: key);
 
   Future<bool> _onWillPop(BuildContext context) async {
     final shouldPop = await showDialog<bool>(
@@ -173,15 +182,23 @@ class CustomerDashboardWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () => _onWillPop(context),
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (bool didPop) async {
+        if (didPop) return;
+        
+        final shouldPop = await _onWillPop(context);
+        if (shouldPop && context.mounted) {
+          SystemNavigator.pop();
+        }
+      },
       child: const CustomerDashboard(),
     );
   }
 }
 
 class BlockedScreen extends StatelessWidget {
-  const BlockedScreen({super.key});
+  const BlockedScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
