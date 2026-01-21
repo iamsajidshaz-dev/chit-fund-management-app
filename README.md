@@ -1,3 +1,4 @@
+# chit-fund-management-app
 # shamazchits
 
 A new Flutter project.
